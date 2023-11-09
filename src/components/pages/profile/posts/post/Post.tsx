@@ -1,13 +1,20 @@
 import './Post.scss'
-import user from '../../../../../assets/images/user.png'
 
-export const Post: React.FC = () => {
+export type PostType = {
+  id: number
+  name: string
+  post: string
+  date: string
+  avatar: string
+}
+
+export const Post: React.FC<PostType> = ({ id, name, post, date, avatar }) => {
   return (
-    <div className='Post'>
-      <img src={user} alt="User avatar" />
-      <span className='Post__user'>Sam Sepiol</span>
-      <p className='Post__text'>Hello friend! I love programming!!!</p>
-      <span className='Post__date'>Date: 09.11.23</span>
+    <div className="Post">
+      <img src={avatar} alt="User avatar" />
+      <span className="Post__user">{name}</span>
+      <p className="Post__text">{post}</p>
+      <span className="Post__date">Date: {date}</span>
     </div>
   )
 }

@@ -1,15 +1,27 @@
 import '../Messages.scss'
 import user from '../../../../assets/images/avatarM.png'
 
-export const Message = () => {
+export type MessageType = {
+  id: number
+  name: string
+  avatar: string
+  message: string
+  date: string
+}
+
+export const Message: React.FC<MessageType> = ({
+  id,
+  name,
+  message,
+  avatar,
+  date,
+}) => {
   return (
     <div className="Message">
-      <img src={user} alt="User avatar" />
-      <span className="Message__user">Dolores Haze</span>
-      <p className="Message__text">
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quo, harum.
-      </p>
-      <span className="Message__date">Date: 09.11.23</span>
+      <img src={avatar} alt="User avatar" />
+      <span className="Message__user">{name}</span>
+      <p className="Message__text">{message}</p>
+      <span className="Message__date">Date: {date}</span>
     </div>
   )
 }
