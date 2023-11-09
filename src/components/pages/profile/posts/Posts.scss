@@ -1,0 +1,65 @@
+.Posts {
+  background-color: #f6f7f9;
+  border-radius: 10px;
+  padding: 15px;
+
+  &__title {
+    display: flex;
+    align-items: center;
+    gap: 0 15px;
+    position: relative;
+    margin-bottom: 20px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      left: -5px;
+      top: -3px;
+      background-color: #006699;
+    }
+  }
+
+  &__icon {
+    position: relative;
+    color: #fff;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+  }
+
+  &__field {
+    width: 70%;
+    height: 70px;
+    border-radius: 10px;
+    border: 1px solid #ebecee;
+    margin-bottom: 10px;
+    padding: 5px;
+    resize: none;
+
+    &:focus {
+      outline: 1px solid #006699;
+    }
+  }
+
+  &__btn {
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 5px;
+    width: 110px;
+    height: 35px;
+    background-color: #006699;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color ease-in 0.3s;
+
+    &:hover {
+      background-color: #0181c2;
+    }
+  }
+}

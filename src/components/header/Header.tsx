@@ -1,5 +1,5 @@
 import { Logo } from '../logo/Logo'
-import '../header/Header.scss'
+import './Header.scss'
 
 export const Header = () => {
   return (

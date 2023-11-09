@@ -68,3 +68,14 @@ body {
   margin: 0 auto;
   padding: 0 15px;
 }
+
+.Wrapper {
+  display: flex;
+  gap: 0 15px;
+}
+
+.Main {
+  padding-top: 90px;
+  width: 100%;
+  height: 100vh;
+}

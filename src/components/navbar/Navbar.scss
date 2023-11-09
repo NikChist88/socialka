@@ -1,0 +1,53 @@
+.Navbar {
+  width: 300px;
+  height: 355px;
+  background-color: #fff;
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  border-radius: 10px;
+  padding: 15px;
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px 0;
+  }
+
+  &__title {
+    align-self: center;
+    font-size: 24px;
+    text-transform: uppercase;
+    color: #006699;
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    gap: 0 20px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #888888;
+    padding: 10px;
+    transition: color ease-in 0.3s;
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 2px;
+      top: 2px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #006699;
+    }
+
+    &:hover {
+      color: #006699;
+    }
+  }
+
+  &__icon {
+    position: relative;
+    color: #fff;
+  }
+}

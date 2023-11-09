@@ -1,0 +1,31 @@
+.Post {
+  display: flex;
+  align-items: center;
+  gap: 0 30px;
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  &__user {
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  &__date {
+    font-weight: 500;
+    color: #339966;
+    margin-left: auto;
+  }
+}
