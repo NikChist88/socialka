@@ -16,6 +16,7 @@ type AppType = {
         date: string
         avatar: string
       }[]
+      newPost: string
     }
     messagesPage: {
       messages: {
@@ -27,10 +28,11 @@ type AppType = {
       }[]
     }
   }
-  addPost: (post: string) => void
+  addPost: (post: string | undefined) => void
+  updatePost: (newPost: string | undefined) => void
 }
 
-export const App: React.FC<AppType> = ({ data, addPost }) => {
+export const App: React.FC<AppType> = ({ data, addPost, updatePost }) => {
   return (
     <div className="App">
       <Header />
@@ -41,7 +43,11 @@ export const App: React.FC<AppType> = ({ data, addPost }) => {
             <Route
               path="/profile"
               element={
-                <Profile posts={data.profilePage.posts} addPost={addPost} />
+                <Profile
+                  profilePage={data.profilePage}
+                  addPost={addPost}
+                  updatePost={updatePost}
+                />
               }
             ></Route>
             <Route

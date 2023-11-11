@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler, useState } from 'react'
+import React, { useRef } from 'react'
 import './Posts.scss'
 import { RiPencilLine } from 'react-icons/ri'
 import { Post } from './post/Post'
@@ -6,19 +6,24 @@ import { PostType } from './post/Post'
 
 export type PostsTypes = {
   posts: PostType[]
-  addPost: (post: string) => void
+  newPost: string
+  addPost: (post: string | undefined) => void
+  updatePost: (newPost: string | undefined) => void
 }
 
-export const Posts: React.FC<PostsTypes> = ({ posts, addPost }) => {
-  const [post, setPost] = useState<string>('')
+export const Posts: React.FC<PostsTypes> = (props) => {
+  const post = useRef<HTMLTextAreaElement>(null)
 
-  const changeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setPost(e.target.value)
+  // Change text in textarea
+  const onChangeHandler = () => {
+    const newPost = post.current?.value
+    props.updatePost(newPost)
   }
 
+  // Add post on click button
   const onClickHandler = () => {
-    addPost(post)
-    setPost('')
+    const newPost = post.current?.value
+    props.addPost(newPost)
   }
 
   return (
@@ -28,12 +33,17 @@ export const Posts: React.FC<PostsTypes> = ({ posts, addPost }) => {
         Create post
       </h3>
       <div className="Posts__form">
-        <textarea className="Posts__field" value={post} onChange={changeHandler}></textarea>
+        <textarea
+          className="Posts__field"
+          ref={post}
+          value={props.newPost}
+          onChange={onChangeHandler}
+        />
         <button className="Posts__btn" onClick={onClickHandler}>
           Add Post
         </button>
       </div>
-      {posts.map((post) => (
+      {props.posts.map((post) => (
         <Post
           key={post.id}
           id={post.id}

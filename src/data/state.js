@@ -17,30 +17,10 @@ export const state = {
         name: 'Silvestre Stallone',
         post: 'Hello friends!!!',
         date: new Date().toDateString(),
-        avatar: men,
-      },
-      {
-        id: 3,
-        name: 'Dollores Haze',
-        post: 'Hey, Hey, Hey!!!',
-        date: new Date().toDateString(),
-        avatar: woman,
-      },
-      {
-        id: 4,
-        name: 'Molly Jane',
-        post: 'Privet!!!',
-        date: new Date().toDateString(),
-        avatar: woman,
-      },
-      {
-        id: 5,
-        name: 'Lara Croft',
-        post: 'Yo, Yo, Yo!!!',
-        date: new Date().toDateString(),
         avatar: woman,
       },
     ],
+    newPost: '',
   },
   messagesPage: {
     messages: [
@@ -95,5 +75,10 @@ export const addPost = (post) => {
   }
 
   state.profilePage.posts.push(newPost)
+  renderEntireTree(state)
+}
+
+export const updatePost = (newPost) => {
+  state.profilePage.newPost = newPost
   renderEntireTree(state)
 }

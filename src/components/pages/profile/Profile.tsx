@@ -1,9 +1,18 @@
 import './Profile.scss'
 import user from '../../../assets/images/user.png'
 import { Posts } from './posts/Posts'
-import { PostsTypes } from './posts/Posts'
+import { PostType } from './posts/post/Post'
 
-export const Profile: React.FC<PostsTypes> = ({ posts, addPost }) => {
+type ProfilePropsType = {
+  profilePage: {
+    posts: PostType[]
+    newPost: string
+  }
+  addPost: (post: string | undefined) => void
+  updatePost: (newPost: string | undefined) => void
+}
+
+export const Profile: React.FC<ProfilePropsType> = (props) => {
   return (
     <section className="Profile">
       <h2 className="Profile__title">Profile</h2>
@@ -11,7 +20,12 @@ export const Profile: React.FC<PostsTypes> = ({ posts, addPost }) => {
         <img src={user} alt="User avatar" />
         <span>Sam Sepiol</span>
       </div>
-      <Posts posts={posts} addPost={addPost} />
+      <Posts
+        posts={props.profilePage.posts}
+        newPost={props.profilePage.newPost}
+        addPost={props.addPost}
+        updatePost={props.updatePost}
+      />
     </section>
   )
 }
