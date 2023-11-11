@@ -1,5 +1,6 @@
 import men from '../assets/images/avatarM.png'
 import woman from '../assets/images/avatarW.png'
+import { renderEntireTree } from '../render'
 
 export const state = {
   profilePage: {
@@ -80,4 +81,19 @@ export const state = {
       },
     ],
   },
+}
+
+export const addPost = (post) => {
+  let maxId = Math.max(...state.profilePage.posts.map((post) => post.id))
+
+  const newPost = {
+    id: ++maxId,
+    name: 'Nick Chistyakov',
+    post: post,
+    date: new Date().toDateString(),
+    avatar: men,
+  }
+
+  state.profilePage.posts.push(newPost)
+  renderEntireTree(state)
 }

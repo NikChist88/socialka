@@ -3,7 +3,7 @@ import './App.scss'
 import { Header } from './components/header/Header'
 import { Navbar } from './components/navbar/Navbar'
 import { Profile } from './components/pages/profile/Profile'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import { Messages } from './components/pages/messages/Messages'
 
 type AppType = {
@@ -27,31 +27,30 @@ type AppType = {
       }[]
     }
   }
+  addPost: (post: string) => void
 }
 
-export const App: React.FC<AppType> = ({ data }) => {
+export const App: React.FC<AppType> = ({ data, addPost }) => {
   return (
     <div className="App">
-      <BrowserRouter>
-        <Header />
-        <main className="Main">
-          <div className="Container">
-            <div className="Wrapper">
-              <Navbar />
-              <Routes>
-                <Route
-                  path="/profile"
-                  element={<Profile posts={data.profilePage.posts} />}
-                ></Route>
-                <Route
-                  path="/messages"
-                  element={<Messages messages={data.messagesPage.messages} />}
-                ></Route>
-              </Routes>
-            </div>
-          </div>
-        </main>
-      </BrowserRouter>
+      <Header />
+      <Navbar />
+      <main className="Main">
+        <div className="Container">
+          <Routes>
+            <Route
+              path="/profile"
+              element={
+                <Profile posts={data.profilePage.posts} addPost={addPost} />
+              }
+            ></Route>
+            <Route
+              path="/messages"
+              element={<Messages messages={data.messagesPage.messages} />}
+            ></Route>
+          </Routes>
+        </div>
+      </main>
     </div>
   )
 }
