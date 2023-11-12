@@ -7,7 +7,7 @@ import { Routes, Route } from 'react-router-dom'
 import { Messages } from './components/pages/messages/Messages'
 
 export type AppPropsType = {
-  data: {
+  state: {
     profilePage: {
       posts: {
         id: number
@@ -32,7 +32,7 @@ export type AppPropsType = {
   updatePost: (newPost: string | undefined) => void
 }
 
-export const App: React.FC<AppPropsType> = ({ data, addPost, updatePost }) => {
+export const App: React.FC<AppPropsType> = ({ state, addPost, updatePost }) => {
   return (
     <div className="App">
       <Header />
@@ -44,7 +44,7 @@ export const App: React.FC<AppPropsType> = ({ data, addPost, updatePost }) => {
               path="/profile"
               element={
                 <Profile
-                  profilePage={data.profilePage}
+                  profilePage={state.profilePage}
                   addPost={addPost}
                   updatePost={updatePost}
                 />
@@ -52,7 +52,7 @@ export const App: React.FC<AppPropsType> = ({ data, addPost, updatePost }) => {
             ></Route>
             <Route
               path="/messages"
-              element={<Messages messages={data.messagesPage.messages} />}
+              element={<Messages messages={state.messagesPage.messages} />}
             ></Route>
           </Routes>
         </div>
