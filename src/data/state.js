@@ -1,7 +1,11 @@
 import men from '../assets/images/avatarM.png'
 import woman from '../assets/images/avatarW.png'
-import { renderEntireTree } from '../render'
 
+let rerenderEntireTree = () => {
+  console.log('State change!');
+}
+
+// State
 export const state = {
   profilePage: {
     posts: [
@@ -45,40 +49,34 @@ export const state = {
         avatar: men,
         date: new Date().toDateString(),
       },
-      {
-        id: 4,
-        name: 'Tim Tim',
-        message: 'Privet!!!',
-        avatar: men,
-        date: new Date().toDateString(),
-      },
-      {
-        id: 5,
-        name: 'Jane Do',
-        message: 'Yo, Yo, Yo!!!',
-        avatar: woman,
-        date: new Date().toDateString(),
-      },
     ],
   },
 }
 
-export const addPost = (post) => {
+// Add post
+export const addPost = () => {
   let maxId = Math.max(...state.profilePage.posts.map((post) => post.id))
 
   const newPost = {
     id: ++maxId,
     name: 'Nick Chistyakov',
-    post: post,
+    post: state.profilePage.newPost,
     date: new Date().toDateString(),
     avatar: men,
   }
 
   state.profilePage.posts.push(newPost)
-  renderEntireTree(state)
+  state.profilePage.newPost = ''
+  rerenderEntireTree(state)
 }
 
+// Update post
 export const updatePost = (newPost) => {
   state.profilePage.newPost = newPost
-  renderEntireTree(state)
+  rerenderEntireTree(state)
+}
+
+// Subscribe
+export const subscripe = (observer) => {
+  rerenderEntireTree = observer
 }

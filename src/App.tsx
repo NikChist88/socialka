@@ -6,7 +6,7 @@ import { Profile } from './components/pages/profile/Profile'
 import { Routes, Route } from 'react-router-dom'
 import { Messages } from './components/pages/messages/Messages'
 
-type AppType = {
+export type AppPropsType = {
   data: {
     profilePage: {
       posts: {
@@ -28,11 +28,11 @@ type AppType = {
       }[]
     }
   }
-  addPost: (post: string | undefined) => void
+  addPost: () => void
   updatePost: (newPost: string | undefined) => void
 }
 
-export const App: React.FC<AppType> = ({ data, addPost, updatePost }) => {
+export const App: React.FC<AppPropsType> = ({ data, addPost, updatePost }) => {
   return (
     <div className="App">
       <Header />

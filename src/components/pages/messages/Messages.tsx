@@ -20,6 +20,14 @@ export const Messages: React.FC<MessagesTypes> = ({ messages }) => {
           date={message.date}
         />
       ))}
+      <div className="Messages__form">
+        <textarea
+          className="Messages__field"
+        />
+        <button className="Messages__btn">
+          Add Message
+        </button>
+      </div>
     </div>
   )
 }

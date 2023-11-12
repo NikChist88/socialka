@@ -8,7 +8,7 @@ type ProfilePropsType = {
     posts: PostType[]
     newPost: string
   }
-  addPost: (post: string | undefined) => void
+  addPost: () => void
   updatePost: (newPost: string | undefined) => void
 }
 

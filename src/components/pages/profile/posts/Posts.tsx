@@ -4,14 +4,14 @@ import { RiPencilLine } from 'react-icons/ri'
 import { Post } from './post/Post'
 import { PostType } from './post/Post'
 
-export type PostsTypes = {
+export type PostsPropsTypes = {
   posts: PostType[]
   newPost: string
-  addPost: (post: string | undefined) => void
+  addPost: () => void
   updatePost: (newPost: string | undefined) => void
 }
 
-export const Posts: React.FC<PostsTypes> = (props) => {
+export const Posts: React.FC<PostsPropsTypes> = (props) => {
   const post = useRef<HTMLTextAreaElement>(null)
 
   // Change text in textarea
@@ -20,10 +20,9 @@ export const Posts: React.FC<PostsTypes> = (props) => {
     props.updatePost(newPost)
   }
 
-  // Add post on click button
+  // Add post
   const onClickHandler = () => {
-    const newPost = post.current?.value
-    props.addPost(newPost)
+    props.addPost()
   }
 
   return (
