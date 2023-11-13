@@ -2,9 +2,7 @@ import React, { useRef } from 'react'
 import './Posts.scss'
 import { RiPencilLine } from 'react-icons/ri'
 import { Post } from './post/Post'
-
-import { PostType } from '../../../../redux/typesStore'
-// import { ProfilePropsType } from '../Profile'
+import { PostType } from '../../../../redux/store'
 
 export type PostsPropsTypes = {
   posts: PostType[]

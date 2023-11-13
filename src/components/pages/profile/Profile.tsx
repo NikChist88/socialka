@@ -1,13 +1,10 @@
 import './Profile.scss'
 import user from '../../../assets/images/user.png'
 import { Posts } from './posts/Posts'
-import { PostType } from '../../../redux/typesStore'
+import { ProfilePageType } from '../../../redux/store'
 
 export type ProfilePropsType = {
-  profilePage: {
-    posts: PostType[]
-    newPost: string | undefined
-  }
+  profilePage: ProfilePageType
   addPost: () => void
   updatePost: (newPost: string | undefined) => void
 }
