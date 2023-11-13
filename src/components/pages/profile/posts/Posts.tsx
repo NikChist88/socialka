@@ -2,21 +2,23 @@ import React, { useRef } from 'react'
 import './Posts.scss'
 import { RiPencilLine } from 'react-icons/ri'
 import { Post } from './post/Post'
-import { PostType } from './post/Post'
+
+import { PostType } from '../../../../redux/typesStore'
+// import { ProfilePropsType } from '../Profile'
 
 export type PostsPropsTypes = {
   posts: PostType[]
-  newPost: string
+  newPost: string | undefined
   addPost: () => void
   updatePost: (newPost: string | undefined) => void
 }
 
 export const Posts: React.FC<PostsPropsTypes> = (props) => {
-  const post = useRef<HTMLTextAreaElement>(null)
+  const textAreaRef = useRef<HTMLTextAreaElement>(null)
 
   // Change text in textarea
   const onChangeHandler = () => {
-    const newPost = post.current?.value
+    const newPost: string | undefined = textAreaRef.current?.value
     props.updatePost(newPost)
   }
 
@@ -34,7 +36,7 @@ export const Posts: React.FC<PostsPropsTypes> = (props) => {
       <div className="Posts__form">
         <textarea
           className="Posts__field"
-          ref={post}
+          ref={textAreaRef}
           value={props.newPost}
           onChange={onChangeHandler}
         />

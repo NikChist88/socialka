@@ -1,12 +1,13 @@
 import './Post.scss'
+import { PostType } from '../../../../../redux/typesStore'
 
-export type PostType = {
-  id: number
-  name: string
-  post: string
-  date: string
-  avatar: string
-}
+// export type PostType = {
+//   id: number
+//   name: string
+//   post: string
+//   date: string
+//   avatar: string
+// }
 
 export const Post: React.FC<PostType> = ({ id, name, post, date, avatar }) => {
   return (

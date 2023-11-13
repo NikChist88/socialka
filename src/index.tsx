@@ -2,15 +2,15 @@ import '../src/styles/global.scss'
 import ReactDOM from 'react-dom/client'
 import { App } from './App'
 import { BrowserRouter as Router } from 'react-router-dom'
-import { store } from './redux/store'
+import { store, StateType } from './redux/typesStore'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
-const rerenderEntireTree = (state: any) => {
+const rerenderEntireTree = (state: StateType) => {
   root.render(
     <Router>
       <App
-        state={state}
+        _state={state}
         addPost={store.addPost.bind(store)}
         updatePost={store.updatePost.bind(store)}
       />
@@ -18,5 +18,5 @@ const rerenderEntireTree = (state: any) => {
   )
 }
 
-rerenderEntireTree(store.getState())
+rerenderEntireTree(store.getState()) 
 store.subscribe(rerenderEntireTree)

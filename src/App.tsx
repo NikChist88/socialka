@@ -6,33 +6,23 @@ import { Profile } from './components/pages/profile/Profile'
 import { Routes, Route } from 'react-router-dom'
 import { Messages } from './components/pages/messages/Messages'
 
+import { ProfilePageType } from './redux/typesStore'
+import { MessagesPageType } from './redux/typesStore'
+
 export type AppPropsType = {
-  state: {
-    profilePage: {
-      posts: {
-        id: number
-        name: string
-        post: string
-        date: string
-        avatar: string
-      }[]
-      newPost: string
-    }
-    messagesPage: {
-      messages: {
-        id: number
-        name: string
-        avatar: string
-        message: string
-        date: string
-      }[]
-    }
+  _state: {
+    profilePage: ProfilePageType
+    messagesPage: MessagesPageType
   }
   addPost: () => void
   updatePost: (newPost: string | undefined) => void
 }
 
-export const App: React.FC<AppPropsType> = ({ state, addPost, updatePost }) => {
+export const App: React.FC<AppPropsType> = ({
+  _state,
+  addPost,
+  updatePost,
+}) => {
   return (
     <div className="App">
       <Header />
@@ -44,7 +34,7 @@ export const App: React.FC<AppPropsType> = ({ state, addPost, updatePost }) => {
               path="/profile"
               element={
                 <Profile
-                  profilePage={state.profilePage}
+                  profilePage={_state.profilePage}
                   addPost={addPost}
                   updatePost={updatePost}
                 />
@@ -52,7 +42,7 @@ export const App: React.FC<AppPropsType> = ({ state, addPost, updatePost }) => {
             ></Route>
             <Route
               path="/messages"
-              element={<Messages messages={state.messagesPage.messages} />}
+              element={<Messages messages={_state.messagesPage.messages} />}
             ></Route>
           </Routes>
         </div>

@@ -4,7 +4,7 @@ import woman from '../assets/images/avatarW.png'
 export type PostType = {
   id: number
   name: string
-  post: string
+  post?: string
   date: string
   avatar: string
 }
@@ -17,23 +17,27 @@ export type MessageType = {
   date: string
 }
 
+export type ProfilePageType = {
+  posts: PostType[]
+  newPost: string | undefined
+}
+
+export type MessagesPageType = {
+  messages: MessageType[]
+}
+
 export type StateType = {
-  profilePage: {
-    posts: PostType[]
-    newPost: string
-  }
-  messagesPage: {
-    messages: MessageType[]
-  }
+  profilePage: ProfilePageType
+  messagesPage: MessagesPageType
 }
 
 export type StoreType = {
   _state: StateType
-  getState: () => {}
+  getState: () => StateType
   _callSubscriber: (state: StateType) => void
   addPost: () => void
-  updatePost: (newPost: string) => void
-  subscribe: (observer: () => void) => void
+  updatePost: (newPost: string | undefined) => void
+  subscribe: (observer: (state: StateType) => void) => void
 }
 
 export const store: StoreType = {
@@ -91,7 +95,7 @@ export const store: StoreType = {
   },
 
   // Rerender Tree
-  _callSubscriber() {
+  _callSubscriber(state: StateType) {
     console.log('State change!')
   },
 
@@ -115,13 +119,13 @@ export const store: StoreType = {
   },
 
   // Update Post
-  updatePost(newPost) {
+  updatePost(newPost: string | undefined) {
     this._state.profilePage.newPost = newPost
     this._callSubscriber(this._state)
   },
 
   // Subscribe
-  subscribe(observer) {
+  subscribe(observer: (state: StateType) => void) {
     this._callSubscriber = observer
   },
 }
