@@ -5,8 +5,7 @@ import { ProfilePageType } from '../../../redux/store'
 
 export type ProfilePropsType = {
   profilePage: ProfilePageType
-  addPost: () => void
-  updatePost: (newPost: string | undefined) => void
+  dispatch: (action: {type: string, post?: string | undefined}) => void
 }
 
 export const Profile: React.FC<ProfilePropsType> = (props) => {
@@ -20,8 +19,7 @@ export const Profile: React.FC<ProfilePropsType> = (props) => {
       <Posts
         posts={props.profilePage.posts}
         newPost={props.profilePage.newPost}
-        addPost={props.addPost}
-        updatePost={props.updatePost}
+        dispatch={props.dispatch}
       />
     </section>
   )

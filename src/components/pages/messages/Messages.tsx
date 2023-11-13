@@ -1,12 +1,8 @@
 import './Messages.scss'
 import { Message } from './message/Message'
-import { MessageType } from './message/Message'
+import { MessagesPageType } from '../../../redux/store'
 
-type MessagesTypes = {
-  messages: MessageType[]
-}
-
-export const Messages: React.FC<MessagesTypes> = ({ messages }) => {
+export const Messages: React.FC<MessagesPageType> = ({ messages }) => {
   return (
     <div className="Messages">
       <h2 className="Messages__title">Messages</h2>

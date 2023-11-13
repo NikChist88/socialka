@@ -11,8 +11,7 @@ const rerenderEntireTree = (state: StateType) => {
     <Router>
       <App
         _state={state}
-        addPost={store.addPost.bind(store)}
-        updatePost={store.updatePost.bind(store)}
+        dispatch={store.dispatch.bind(store)}
       />
     </Router>
   )

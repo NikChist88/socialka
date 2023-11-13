@@ -33,11 +33,10 @@ export type StateType = {
 
 export type StoreType = {
   _state: StateType
-  getState: () => StateType
   _callSubscriber: (state: StateType) => void
-  addPost: () => void
-  updatePost: (newPost: string | undefined) => void
+  getState: () => StateType
   subscribe: (observer: (state: StateType) => void) => void
+  dispatch: (action: { type: string; post?: string | undefined }) => void
 }
 
 export const store: StoreType = {
@@ -89,43 +88,43 @@ export const store: StoreType = {
     },
   },
 
-  // Getter state
-  getState() {
-    return this._state
-  },
-
   // Rerender Tree
   _callSubscriber(state: StateType) {
     console.log('State change!')
   },
 
-  // Add Post
-  addPost() {
-    let maxId = Math.max(
-      ...this._state.profilePage.posts.map((post) => post.id)
-    )
-
-    const newPost: PostType = {
-      id: ++maxId,
-      name: 'Nick Chistyakov',
-      post: this._state.profilePage.newPost,
-      date: new Date().toDateString(),
-      avatar: men,
-    }
-
-    this._state.profilePage.posts.push(newPost)
-    this._state.profilePage.newPost = ''
-    this._callSubscriber(this._state)
-  },
-
-  // Update Post
-  updatePost(newPost: string | undefined) {
-    this._state.profilePage.newPost = newPost
-    this._callSubscriber(this._state)
+  // Getter state
+  getState() {
+    return this._state
   },
 
   // Subscribe
   subscribe(observer: (state: StateType) => void) {
     this._callSubscriber = observer
+  },
+
+  // Dispatch
+  dispatch(action: { type: string; post?: string | undefined }) {
+    if (action.type === 'ADD-POST') {
+      let maxId = Math.max(
+        ...this._state.profilePage.posts.map((post) => post.id)
+      )
+
+      const newPost: PostType = {
+        id: ++maxId,
+        name: 'Nick Chistyakov',
+        post: this._state.profilePage.newPost,
+        date: new Date().toDateString(),
+        avatar: men,
+      }
+
+      this._state.profilePage.posts.push(newPost)
+      this._state.profilePage.newPost = ''
+      this._callSubscriber(this._state)
+    } 
+    else if (action.type === 'UPDATE-POST') {
+      this._state.profilePage.newPost = action.post
+      this._callSubscriber(this._state)
+    }
   },
 }

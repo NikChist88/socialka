@@ -7,8 +7,7 @@ import { PostType } from '../../../../redux/store'
 export type PostsPropsTypes = {
   posts: PostType[]
   newPost: string | undefined
-  addPost: () => void
-  updatePost: (newPost: string | undefined) => void
+  dispatch: (action: {type: string, post?: string | undefined}) => void
 }
 
 export const Posts: React.FC<PostsPropsTypes> = (props) => {
@@ -17,12 +16,12 @@ export const Posts: React.FC<PostsPropsTypes> = (props) => {
   // Change text in textarea
   const onChangeHandler = () => {
     const newPost: string | undefined = textAreaRef.current?.value
-    props.updatePost(newPost)
+    props.dispatch({ type: 'UPDATE-POST', post: newPost })
   }
 
   // Add post
   const onClickHandler = () => {
-    props.addPost()
+    props.dispatch({ type: 'ADD-POST' })
   }
 
   return (

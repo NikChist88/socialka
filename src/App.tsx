@@ -9,8 +9,7 @@ import { StateType } from './redux/store'
 
 export type AppPropsType = {
   _state: StateType
-  addPost: () => void
-  updatePost: (newPost: string | undefined) => void
+  dispatch: (action: {type: string, post?: string | undefined}) => void
 }
 
 export const App: React.FC<AppPropsType> = (props) => {
@@ -26,8 +25,7 @@ export const App: React.FC<AppPropsType> = (props) => {
               element={
                 <Profile
                   profilePage={props._state.profilePage}
-                  addPost={props.addPost}
-                  updatePost={props.updatePost}
+                  dispatch={props.dispatch}
                 />
               }
             ></Route>
