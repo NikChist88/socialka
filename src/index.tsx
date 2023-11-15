@@ -10,7 +10,7 @@ const rerenderEntireTree = (state: StateType) => {
   root.render(
     <Router>
       <App
-        _state={state}
+        state={state}
         dispatch={store.dispatch.bind(store)}
       />
     </Router>

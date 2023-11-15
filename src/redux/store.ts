@@ -1,5 +1,12 @@
 import men from '../assets/images/avatarM.png'
 import woman from '../assets/images/avatarW.png'
+import { profileReducer } from './profile-reducer'
+import { messagesReducer } from './messages-reducer'
+
+const ADD_POST = 'ADD-POST'
+const UPDATE_POST = 'UPDATE-POST'
+const ADD_MESSAGE = 'ADD_MESSAGE'
+const UPDATE_MESSAGE = 'UPDATE_MESSAGE'
 
 export type PostType = {
   id: number
@@ -12,23 +19,50 @@ export type PostType = {
 export type MessageType = {
   id: number
   name: string
-  message: string
+  message?: string
   avatar: string
   date: string
+}
+
+export type InfoContentType = {
+  title: string
+  text: string
+}
+
+export type InfoColumnType = {
+  mainTitle: string
+  column: InfoContentType[]
+  column2: InfoContentType[]
+}
+
+export type InfoProfileType = {
+  infoCard: InfoColumnType
+}
+
+export type SidebarLinkType = {
+  id: number
+  link: string
+}
+
+export type SidebarType = {
+  sidebarLinks: SidebarLinkType[]
 }
 
 export type ProfilePageType = {
   posts: PostType[]
   newPost: string | undefined
+  profileInfo: InfoProfileType
 }
 
 export type MessagesPageType = {
   messages: MessageType[]
+  newMessage: string | undefined
 }
 
 export type StateType = {
   profilePage: ProfilePageType
   messagesPage: MessagesPageType
+  sidebar: SidebarType
 }
 
 export type StoreType = {
@@ -36,7 +70,17 @@ export type StoreType = {
   _callSubscriber: (state: StateType) => void
   getState: () => StateType
   subscribe: (observer: (state: StateType) => void) => void
-  dispatch: (action: { type: string; post?: string | undefined }) => void
+  dispatch: (action: {
+    type: string
+    post?: string | undefined
+    message?: string | undefined
+  }) => void
+}
+
+export type ActionType = {
+  type: string
+  post?: string | undefined
+  message?: string | undefined
 }
 
 export const store: StoreType = {
@@ -60,6 +104,39 @@ export const store: StoreType = {
         },
       ],
       newPost: '',
+      profileInfo: {
+        infoCard: {
+          mainTitle: 'Personal Information',
+          column: [
+            {
+              title: 'name',
+              text: 'Sam Sepiol',
+            },
+            {
+              title: 'birthday',
+              text: '07/08/1988',
+            },
+            {
+              title: 'website',
+              text: 'www.it-kamasutra.com',
+            },
+          ],
+          column2: [
+            {
+              title: 'gender',
+              text: 'male',
+            },
+            {
+              title: 'location',
+              text: 'Russia',
+            },
+            {
+              title: 'biography',
+              text: 'Frontend Developer',
+            },
+          ],
+        },
+      },
     },
     messagesPage: {
       messages: [
@@ -85,6 +162,16 @@ export const store: StoreType = {
           date: new Date().toDateString(),
         },
       ],
+      newMessage: '',
+    },
+    sidebar: {
+      sidebarLinks: [
+        { id: 1, link: 'Profile' },
+        { id: 2, link: 'Messages' },
+        { id: 3, link: 'News' },
+        { id: 4, link: 'Music' },
+        { id: 5, link: 'Settings' },
+      ],
     },
   },
 
@@ -104,27 +191,24 @@ export const store: StoreType = {
   },
 
   // Dispatch
-  dispatch(action: { type: string; post?: string | undefined }) {
-    if (action.type === 'ADD-POST') {
-      let maxId = Math.max(
-        ...this._state.profilePage.posts.map((post) => post.id)
-      )
-
-      const newPost: PostType = {
-        id: ++maxId,
-        name: 'Nick Chistyakov',
-        post: this._state.profilePage.newPost,
-        date: new Date().toDateString(),
-        avatar: men,
-      }
-
-      this._state.profilePage.posts.push(newPost)
-      this._state.profilePage.newPost = ''
-      this._callSubscriber(this._state)
-    } 
-    else if (action.type === 'UPDATE-POST') {
-      this._state.profilePage.newPost = action.post
-      this._callSubscriber(this._state)
-    }
+  dispatch(action: ActionType) {
+    this._state.profilePage = profileReducer(this._state.profilePage, action)
+    this._state.messagesPage = messagesReducer(this._state.messagesPage, action)
+    this._callSubscriber(this._state)
+    // this._state.profilePage = profileReducer(this._state.profilePage, action)
+    // messagesReducer(this._state, addMessage())
   },
 }
+
+// Action Creators
+export const addPost = () => ({ type: ADD_POST })
+export const updatePost = (post: string | undefined) => ({
+  type: UPDATE_POST,
+  post: post,
+})
+
+export const addMessage = () => ({ type: ADD_MESSAGE })
+export const updateMessage = (message: string | undefined) => ({
+  type: UPDATE_MESSAGE,
+  message: message,
+})

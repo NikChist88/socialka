@@ -8,15 +8,19 @@ import { Messages } from './components/pages/messages/Messages'
 import { StateType } from './redux/store'
 
 export type AppPropsType = {
-  _state: StateType
-  dispatch: (action: {type: string, post?: string | undefined}) => void
+  state: StateType
+  dispatch: (action: {
+    type: string
+    post?: string | undefined
+    message?: string | undefined
+  }) => void
 }
 
 export const App: React.FC<AppPropsType> = (props) => {
   return (
     <div className="App">
       <Header />
-      <Navbar />
+      <Navbar sidebar={props.state.sidebar} />
       <main className="Main">
         <div className="Container">
           <Routes>
@@ -24,7 +28,7 @@ export const App: React.FC<AppPropsType> = (props) => {
               path="/profile"
               element={
                 <Profile
-                  profilePage={props._state.profilePage}
+                  profilePage={props.state.profilePage}
                   dispatch={props.dispatch}
                 />
               }
@@ -32,7 +36,11 @@ export const App: React.FC<AppPropsType> = (props) => {
             <Route
               path="/messages"
               element={
-                <Messages messages={props._state.messagesPage.messages} />
+                <Messages
+                  messages={props.state.messagesPage.messages}
+                  newMessage={props.state.messagesPage.newMessage}
+                  dispatch={props.dispatch}
+                />
               }
             ></Route>
           </Routes>

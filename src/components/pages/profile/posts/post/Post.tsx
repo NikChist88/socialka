@@ -1,13 +1,13 @@
 import './Post.scss'
 import { PostType } from '../../../../../redux/store'
 
-export const Post: React.FC<PostType> = ({ id, name, post, date, avatar }) => {
+export const Post: React.FC<PostType> = (props) => {
   return (
     <div className="Post">
-      <img src={avatar} alt="User avatar" />
-      <span className="Post__user">{name}</span>
-      <p className="Post__text">{post}</p>
-      <span className="Post__date">Date: {date}</span>
+      <img src={props.avatar} alt="User avatar" />
+      <span className="Post__user">{props.name}</span>
+      <p className="Post__text">{props.post}</p>
+      <span className="Post__date">Date: {props.date}</span>
     </div>
   )
 }

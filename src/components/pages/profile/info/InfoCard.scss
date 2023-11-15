@@ -1,0 +1,36 @@
+.Info {
+}
+.InfoCard {
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  margin-bottom: 30px;
+  margin-bottom: 15px;
+}
+.InfoCard__title {
+  font-size: 20px;
+  font-weight: 400;
+  padding: 0 15px 15px 0;
+  border-bottom: 1px solid #eee;
+}
+.InfoCard__body {
+  padding: 15px 15px 15px 0;
+  display: flex;
+}
+.InfoCard__col {
+  flex: 0 1 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px 0;
+}
+.InfoCard__field {
+}
+.InfoCard__subtitle {
+  margin-bottom: 10px;
+  color: #6f7f92;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.InfoCard__text {
+}

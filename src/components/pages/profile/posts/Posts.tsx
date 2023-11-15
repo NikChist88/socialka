@@ -3,25 +3,27 @@ import './Posts.scss'
 import { RiPencilLine } from 'react-icons/ri'
 import { Post } from './post/Post'
 import { PostType } from '../../../../redux/store'
+import { addPost, updatePost } from '../../../../redux/store'
 
 export type PostsPropsTypes = {
   posts: PostType[]
   newPost: string | undefined
-  dispatch: (action: {type: string, post?: string | undefined}) => void
+  dispatch: (action: { type: string; post?: string | undefined }) => void
 }
 
 export const Posts: React.FC<PostsPropsTypes> = (props) => {
-  const textAreaRef = useRef<HTMLTextAreaElement>(null)
+  // const textAreaRef = useRef<HTMLTextAreaElement>(null)
 
   // Change text in textarea
-  const onChangeHandler = () => {
-    const newPost: string | undefined = textAreaRef.current?.value
-    props.dispatch({ type: 'UPDATE-POST', post: newPost })
+  const onChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    // const newPost: string | undefined = textAreaRef.current?.value
+    const newPost = e.target.value
+    props.dispatch(updatePost(newPost))
   }
 
   // Add post
   const onClickHandler = () => {
-    props.dispatch({ type: 'ADD-POST' })
+    props.dispatch(addPost())
   }
 
   return (
@@ -33,7 +35,7 @@ export const Posts: React.FC<PostsPropsTypes> = (props) => {
       <div className="Posts__form">
         <textarea
           className="Posts__field"
-          ref={textAreaRef}
+          // ref={textAreaRef}
           value={props.newPost}
           onChange={onChangeHandler}
         />
