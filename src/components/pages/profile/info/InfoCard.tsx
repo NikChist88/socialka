@@ -1,11 +1,12 @@
 import './InfoCard.scss'
-import { InfoColumnType } from '../../../../redux/store'
+import { FC } from 'react'
+import { InfoColumnType } from '../../../../types/profileInfo'
 
 type InfoCardPropsType = {
   infoCard: InfoColumnType
 }
 
-export const InfoCard: React.FC<InfoCardPropsType> = ({ infoCard }) => {
+export const InfoCard: FC<InfoCardPropsType> = ({ infoCard }) => {
   return (
     <div className="InfoCard">
       <h3 className="InfoCard__title">{infoCard.mainTitle}</h3>

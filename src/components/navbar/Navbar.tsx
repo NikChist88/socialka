@@ -1,54 +1,29 @@
 import './Navbar.scss'
-import {
-  RiProfileLine,
-  RiMessage2Line,
-  RiNewspaperLine,
-  RiMusic2Line,
-  RiSettings2Line,
-} from 'react-icons/ri'
-import { NavLink } from 'react-router-dom'
-import { SidebarType } from '../../redux/store'
+import { FC } from 'react'
+import { NavbarLink } from './NavbarLink'
+import { NavbarType } from '../../types/navbar'
 
-type NavbarPorpsType = {
-  sidebar: SidebarType
+type NavbarPropsType = {
+  navbar: NavbarType[]
 }
 
-export const Navbar: React.FC<NavbarPorpsType> = (props) => {
+export const Navbar: FC<NavbarPropsType> = ({ navbar }) => {
   return (
     <aside className="Navbar">
       <nav className="Navbar__nav">
         <ul className="Navbar__list">
           <h3 className="Navbar__title">Pages</h3>
-          <li className="Navbar__item">
-            <NavLink className="Navbar__link" to="/profile">
-              <RiProfileLine className="Navbar__icon" size={'18px'} />
-              Profile
-            </NavLink>
-          </li>
-          <li className="Navbar__item">
-            <NavLink className="Navbar__link" to="/messages">
-              <RiMessage2Line className="Navbar__icon" size={'18px'} />
-              Messages
-            </NavLink>
-          </li>
-          <li className="Navbar__item">
-            <NavLink className="Navbar__link" to="/">
-              <RiNewspaperLine className="Navbar__icon" size={'18px'} />
-              News
-            </NavLink>
-          </li>
-          <li className="Navbar__item">
-            <NavLink className="Navbar__link" to="/">
-              <RiMusic2Line className="Navbar__icon" size={'18px'} />
-              Music
-            </NavLink>
-          </li>
-          <li className="Navbar__item">
-            <NavLink className="Navbar__link" to="/">
-              <RiSettings2Line className="Navbar__icon" size={'18px'} />
-              Settings
-            </NavLink>
-          </li>
+          {navbar.map((el) => {
+            return (
+              <NavbarLink
+                key={el.id}
+                id={el.id}
+                to={el.to}
+                title={el.title}
+                iconId={el.iconId}
+              />
+            )
+          })}
         </ul>
       </nav>
     </aside>

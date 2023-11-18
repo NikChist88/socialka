@@ -37,10 +37,10 @@
     &::before {
       content: '';
       position: absolute;
-      left: 6px;
-      top: 8px;
-      width: 30px;
-      height: 30px;
+      left: 4px;
+      top: 4px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       background-color: #4374c0;
     }
@@ -49,10 +49,15 @@
       color: #006699;
       background-color: #eaeff8;
     }
+
+    &.active {
+      color: #006699;
+      background-color: #eaeff8;
+    }
   }
 
   &__icon {
     position: relative;
-    color: #fff;
+    fill: #fff;
   }
 }

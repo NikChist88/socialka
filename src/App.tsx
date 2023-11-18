@@ -1,45 +1,41 @@
 import './App.scss'
-import React from 'react'
+import { FC } from 'react'
 import { Header } from './components/header/Header'
 import { Navbar } from './components/navbar/Navbar'
 import { Profile } from './components/pages/profile/Profile'
 import { Routes, Route } from 'react-router-dom'
 import { Messages } from './components/pages/messages/Messages'
-import { StateType } from './redux/store'
+import { StateType } from './types/state'
+import { MessagesActionType } from './store/actionTypes'
 
-export type AppPropsType = {
+type AppPropsType = {
   state: StateType
-  dispatch: (action: {
-    type: string
-    post?: string | undefined
-    message?: string | undefined
-  }) => void
+  dispatch: (action: MessagesActionType) => void
 }
 
-export const App: React.FC<AppPropsType> = (props) => {
+export const App: FC<AppPropsType> = (props) => {
+  const { state, dispatch } = props
+  
   return (
     <div className="App">
       <Header />
-      <Navbar sidebar={props.state.sidebar} />
+      <Navbar navbar={state.navbar} />
       <main className="Main">
         <div className="Container">
           <Routes>
             <Route
               path="/profile"
               element={
-                <Profile
-                  profilePage={props.state.profilePage}
-                  dispatch={props.dispatch}
-                />
+                <Profile />
               }
             ></Route>
             <Route
               path="/messages"
               element={
                 <Messages
-                  messages={props.state.messagesPage.messages}
-                  newMessage={props.state.messagesPage.newMessage}
-                  dispatch={props.dispatch}
+                  messages={state.messages}
+                  newMessage={state.newMessage}
+                  dispatch={dispatch}
                 />
               }
             ></Route>

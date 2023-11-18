@@ -1,28 +1,32 @@
 import './Messages.scss'
+import { FC, ChangeEvent } from 'react'
 import { Message } from './message/Message'
-import { MessageType } from '../../../redux/store'
-import { addMessage, updateMessage } from '../../../redux/store'
+import { MessageType } from '../../../types/messages'
+import { MessagesActionType } from '../../../store/actionTypes'
+import { addMessage, updateMessage } from '../../../store/actionCreators'
 
 type MessagesPropsType = {
   messages: MessageType[]
-  newMessage: string | undefined
-  dispatch: (action: { type: string; message?: string | undefined }) => void
+  newMessage: string
+  dispatch: (action: MessagesActionType) => void
 }
 
-export const Messages: React.FC<MessagesPropsType> = (props) => {
-  const onChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const newMessage = e.target.value
-    props.dispatch(updateMessage(newMessage))
+export const Messages: FC<MessagesPropsType> = (props) => {
+  const { messages, newMessage, dispatch } = props
+
+  const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const text: string = e.target.value
+    dispatch(updateMessage(text))
   }
 
   const onClickHandler = () => {
-    props.dispatch(addMessage())
+    dispatch(addMessage())
   }
 
   return (
     <div className="Messages">
       <h2 className="Messages__title">Messages</h2>
-      {props.messages.map((message) => (
+      {messages.map((message) => (
         <Message
           key={message.id}
           id={message.id}
@@ -35,7 +39,7 @@ export const Messages: React.FC<MessagesPropsType> = (props) => {
       <div className="Messages__form">
         <textarea
           className="Messages__field"
-          value={props.newMessage}
+          value={newMessage}
           onChange={onChangeHandler}
         />
         <button className="Messages__btn" onClick={onClickHandler}>

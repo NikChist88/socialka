@@ -1,13 +1,16 @@
 import '../Messages.scss'
-import { MessageType } from '../../../../redux/store'
+import { FC } from 'react'
+import { MessageType } from '../../../../types/messages'
 
-export const Message: React.FC<MessageType> = (props) => {
+export const Message: FC<MessageType> = (props) => {
+  const { avatar, name, message, date } = props
+  
   return (
     <div className="Message">
-      <img src={props.avatar} alt="User avatar" />
-      <span className="Message__user">{props.name}</span>
-      <p className="Message__text">{props.message}</p>
-      <span className="Message__date">Date: {props.date}</span>
+      <img src={avatar} alt="User avatar" />
+      <span className="Message__user">{name}</span>
+      <p className="Message__text">{message}</p>
+      <span className="Message__date">Date: {date}</span>
     </div>
   )
 }
